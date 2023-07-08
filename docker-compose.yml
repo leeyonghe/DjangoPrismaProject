@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  dp_project:
+    tty: true
+    container_name: dp_project
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+    volumes:
+      - ./project/:/main
+    command: sh -c "npx prisma migrate dev && npx prisma generate --schema prisma/schema.prisma && python3 manage.py runserver 0:80"
+    depends_on:
+      - "postgres"
+  postgres:
+    container_name: postgres
+    tty: true
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123!
+      PGDATA: /data/postgres
+    ports:
+      - "5432:5432"
+    restart: unless-stopped

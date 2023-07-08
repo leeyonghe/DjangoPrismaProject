@@ -1,0 +1,8 @@
+psycopg2==2.9.6
+Django==4.2.1
+requests==2.30.0
+djangorestframework==3.14.0
+django-cors-headers==4.1.0
+django-extensions==3.2.3
+prisma==0.9.1
+prisma-client==0.2.1
